@@ -9,4 +9,4 @@ sources:
 styles:
   s1:
     tm2: ./map/osm-bright.tm2/project.xml
-    sourceId: v1
+    source: v1
