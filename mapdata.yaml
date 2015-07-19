@@ -1,6 +1,6 @@
 sources:
   v1c:
-    uri: cassandra://?cp=127.0.0.1&keyspace=v1&repfactor=1&durablewrite=0&username=cassandra&password=cassandra
+    uri: cassandra://?cp=10.192.0.128&keyspace=v1&repfactor=1&durablewrite=0&username=cassandra&password=cassandra
   v1:
     uri: overzoom://
     ref: {source: v1c}
