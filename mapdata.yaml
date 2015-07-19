@@ -10,3 +10,4 @@ styles:
   s1:
     tm2: ./map/osm-bright.tm2/project.xml
     source: v1
+    public: true
