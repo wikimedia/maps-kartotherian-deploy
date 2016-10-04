@@ -547,9 +547,9 @@
       "resolved": "git+https://github.com/kartotherian/kartotherian-demultiplexer.git#92d54bdd10ce15cfe3c537e11d5a54f4dedb84ff"
     },
     "kartotherian-geoshapes": {
-      "version": "0.0.7",
+      "version": "0.0.8",
       "from": "git+https://github.com/kartotherian/kartotherian-geoshapes.git",
-      "resolved": "git+https://github.com/kartotherian/kartotherian-geoshapes.git#7975b636e1185fe56cf293479333277737c9c906",
+      "resolved": "git+https://github.com/kartotherian/kartotherian-geoshapes.git#f8b03aadef6fdd2c52d9bce5da7f1a9053db02a8",
       "dependencies": {
         "pg.js": {
           "version": "4.1.1",
@@ -2093,7 +2093,7 @@
                     },
                     "minimatch": {
                       "version": "3.0.3",
-                      "from": "minimatch@>=3.0.2 <4.0.0",
+                      "from": "minimatch@>=3.0.0 <4.0.0",
                       "resolved": "https://registry.npmjs.org/minimatch/-/minimatch-3.0.3.tgz",
                       "dependencies": {
                         "brace-expansion": {
@@ -2269,7 +2269,7 @@
                     },
                     "inherits": {
                       "version": "2.0.3",
-                      "from": "inherits@>=2.0.1 <2.1.0",
+                      "from": "inherits@>=2.0.0 <3.0.0",
                       "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
                     },
                     "isarray": {
