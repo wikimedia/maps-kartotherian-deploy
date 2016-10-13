@@ -530,9 +530,9 @@
       }
     },
     "kartotherian-core": {
-      "version": "0.0.16",
+      "version": "0.0.17",
       "from": "git+https://github.com/kartotherian/kartotherian-core.git",
-      "resolved": "git+https://github.com/kartotherian/kartotherian-core.git#2c1c40dc9e61483ddb53b9d023ae38f17b43078e",
+      "resolved": "git+https://github.com/kartotherian/kartotherian-core.git#1ae61eb7e9620c1d0123d56c3959795584b2d750",
       "dependencies": {
         "xmldoc": {
           "version": "0.3.1",
@@ -1323,7 +1323,14 @@
         },
         "mwapi": {
           "version": "0.0.7",
-          "from": "mwapi@>=0.0.7 <0.0.8"
+          "from": "mwapi@>=0.0.7 <0.0.8",
+          "dependencies": {
+            "extend": {
+              "version": "3.0.0",
+              "from": "extend@>=3.0.0 <4.0.0",
+              "resolved": "https://registry.npmjs.org/extend/-/extend-3.0.0.tgz"
+            }
+          }
         },
         "geojson-mapnikify": {
           "version": "0.7.1",
@@ -1388,6 +1395,11 @@
                   "version": "0.11.0",
                   "from": "caseless@>=0.11.0 <0.12.0",
                   "resolved": "https://registry.npmjs.org/caseless/-/caseless-0.11.0.tgz"
+                },
+                "extend": {
+                  "version": "3.0.0",
+                  "from": "extend@>=3.0.0 <3.1.0",
+                  "resolved": "https://registry.npmjs.org/extend/-/extend-3.0.0.tgz"
                 },
                 "forever-agent": {
                   "version": "0.6.1",
@@ -2290,9 +2302,9 @@
                       "resolved": "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
                     },
                     "inflight": {
-                      "version": "1.0.5",
+                      "version": "1.0.6",
                       "from": "inflight@>=1.0.4 <2.0.0",
-                      "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.5.tgz",
+                      "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz",
                       "dependencies": {
                         "wrappy": {
                           "version": "1.0.2",
@@ -2368,7 +2380,7 @@
                 },
                 "fstream": {
                   "version": "1.0.10",
-                  "from": "fstream@>=1.0.2 <2.0.0",
+                  "from": "fstream@>=1.0.10 <1.1.0",
                   "resolved": "https://registry.npmjs.org/fstream/-/fstream-1.0.10.tgz",
                   "dependencies": {
                     "graceful-fs": {
