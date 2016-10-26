@@ -2560,9 +2560,9 @@
       "resolved": "https://registry.npmjs.org/which-module/-/which-module-1.0.0.tgz"
     },
     "wikimedia-mapdata": {
-      "version": "0.2.0",
+      "version": "0.2.5",
       "from": "nyurik/wikimedia-mapdata",
-      "resolved": "git://github.com/nyurik/wikimedia-mapdata.git#5c8c02c9871be58787502d246ea67422e9fbd92c"
+      "resolved": "git://github.com/nyurik/wikimedia-mapdata.git#8b3f9552bb883066b42ed33f11387c0a3cbb6276"
     },
     "window-size": {
       "version": "0.2.0",
