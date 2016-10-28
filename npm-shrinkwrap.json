@@ -710,9 +710,9 @@
       }
     },
     "kartotherian-core": {
-      "version": "0.0.18",
+      "version": "0.0.17",
       "from": "git+https://github.com/kartotherian/kartotherian-core.git",
-      "resolved": "git+https://github.com/kartotherian/kartotherian-core.git#18e02afedcf8c8085338865f12df24713999b28b",
+      "resolved": "git+https://github.com/kartotherian/kartotherian-core.git#1ae61eb7e9620c1d0123d56c3959795584b2d750",
       "dependencies": {
         "underscore": {
           "version": "1.8.3",
@@ -1348,9 +1348,9 @@
       }
     },
     "kartotherian-overzoom": {
-      "version": "0.0.6",
+      "version": "0.0.7",
       "from": "git+https://github.com/kartotherian/kartotherian-overzoom.git",
-      "resolved": "git+https://github.com/kartotherian/kartotherian-overzoom.git#464c8ec77a9fd5cc9b54ad445a29d4d9041ee409"
+      "resolved": "git+https://github.com/kartotherian/kartotherian-overzoom.git#e69a32c844293aae6bbe6ae599501ef5a6fb2c71"
     },
     "kartotherian-postgres": {
       "version": "0.0.7",
