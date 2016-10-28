@@ -710,9 +710,9 @@
       }
     },
     "kartotherian-core": {
-      "version": "0.0.17",
+      "version": "0.0.18",
       "from": "git+https://github.com/kartotherian/kartotherian-core.git",
-      "resolved": "git+https://github.com/kartotherian/kartotherian-core.git#1ae61eb7e9620c1d0123d56c3959795584b2d750",
+      "resolved": "git+https://github.com/kartotherian/kartotherian-core.git#18e02afedcf8c8085338865f12df24713999b28b",
       "dependencies": {
         "underscore": {
           "version": "1.8.3",
