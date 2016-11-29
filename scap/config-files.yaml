@@ -1,4 +1,4 @@
-----
+---
 /etc/kartotherian/config.yaml:
   template: config.yaml.j2
   erb_syntax: True
