@@ -5,7 +5,7 @@ logging:
     - host: <%= logstash_host %>
       port: <%= logstash_port %>
       type: gelf
-    - level: info
+    - level: warn
       path: <%= log_file %>
       type: file
 metrics:
