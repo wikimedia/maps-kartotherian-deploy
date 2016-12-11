@@ -1599,9 +1599,9 @@
       }
     },
     "kartotherian-snapshot": {
-      "version": "0.2.8",
+      "version": "0.2.9",
       "from": "git+https://github.com/kartotherian/kartotherian-snapshot.git",
-      "resolved": "git+https://github.com/kartotherian/kartotherian-snapshot.git#47e90d92f84a2fb396ee7062100ce57446d3c42a",
+      "resolved": "git+https://github.com/kartotherian/kartotherian-snapshot.git#ce6bb725b78589bd1841b5b2a7098d567aa985e9",
       "dependencies": {
         "abaculus": {
           "version": "2.0.3",
