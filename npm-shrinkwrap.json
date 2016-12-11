@@ -1599,9 +1599,9 @@
       }
     },
     "kartotherian-snapshot": {
-      "version": "0.2.7",
+      "version": "0.2.8",
       "from": "git+https://github.com/kartotherian/kartotherian-snapshot.git",
-      "resolved": "git+https://github.com/kartotherian/kartotherian-snapshot.git#6db5fb97470df88e617d0fccac6ef97b8aeab58f",
+      "resolved": "git+https://github.com/kartotherian/kartotherian-snapshot.git#47e90d92f84a2fb396ee7062100ce57446d3c42a",
       "dependencies": {
         "abaculus": {
           "version": "2.0.3",
@@ -2047,8 +2047,8 @@
         },
         "wikimedia-mapdata": {
           "version": "0.3.0",
-          "from": "git+https://gerrit.wikimedia.org/r/mapdata#497bccd38c9a440ab32d0d64ec90f44ca8ea8d32",
-          "resolved": "git+https://gerrit.wikimedia.org/r/mapdata#497bccd38c9a440ab32d0d64ec90f44ca8ea8d32"
+          "from": "git+https://gerrit.wikimedia.org/r/mapdata#ee3a9e5dcfb89cffc28acb24e2cc281931ceaf08",
+          "resolved": "git+https://gerrit.wikimedia.org/r/mapdata#ee3a9e5dcfb89cffc28acb24e2cc281931ceaf08"
         },
         "sphericalmercator": {
           "version": "1.0.5",
