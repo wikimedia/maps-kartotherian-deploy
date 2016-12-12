@@ -46,7 +46,7 @@ services:
           host: "{{request.params.domain}}"
           user-agent: "{{user-agent}}"
         method: post
-        uri: <%= mwapi %>
+        uri: <%= mwapi_uri %>
       port: <%= port %>
       proxy: <%= proxy %>
       restbase_req:
@@ -54,7 +54,7 @@ services:
         headers: "{{request.headers}}"
         method: "{{request.method}}"
         query: "{{ default(request.query, {}) }}"
-        uri: "<%= restbase %>/{{domain}}/v1/{+path}"
+        uri: "<%= restbase_uri %>/{{domain}}/v1/{+path}"
       sources: <%= conf_sources %>
       variables:
         cassandra-pswd: <%= cassandra_password %>
