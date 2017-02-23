@@ -95,7 +95,7 @@ NAN_METHOD(MemoryDatasource::New)
         }
         else
         {
-            params[TOSTR(name)] = TOSTR(value);
+            params[TOSTR(name)] = const_cast<char const*>(TOSTR(value));
         }
         i++;
     }
@@ -134,7 +134,7 @@ NAN_METHOD(MemoryDatasource::describe)
 {
     MemoryDatasource* d = Nan::ObjectWrap::Unwrap<MemoryDatasource>(info.Holder());
     v8::Local<v8::Object> description = Nan::New<v8::Object>();
-    if (d->datasource_) 
+    if (d->datasource_)
     {
         node_mapnik::describe_datasource(description,d->datasource_);
     }
@@ -146,7 +146,46 @@ NAN_METHOD(MemoryDatasource::featureset)
     MemoryDatasource* d = Nan::ObjectWrap::Unwrap<MemoryDatasource>(info.Holder());
 
     if (d->datasource_) {
-        mapnik::query q(d->datasource_->envelope());
+        mapnik::box2d<double> extent = d->datasource_->envelope();
+        if (info.Length() > 0)
+        {
+            // options object
+            if (!info[0]->IsObject())
+            {
+                Nan::ThrowTypeError("optional second argument must be an options object");
+                return;
+            }
+            v8::Local<v8::Object> options = info[0]->ToObject();
+            if (options->Has(Nan::New("extent").ToLocalChecked()))
+            {
+                v8::Local<v8::Value> extent_opt = options->Get(Nan::New("extent").ToLocalChecked());
+                if (!extent_opt->IsArray())
+                {
+                    Nan::ThrowTypeError("extent value must be an array of [minx,miny,maxx,maxy]");
+                    return;
+                }
+                v8::Local<v8::Array> bbox = extent_opt.As<v8::Array>();
+                auto len = bbox->Length();
+                if (!(len == 4))
+                {
+                    Nan::ThrowTypeError("extent value must be an array of [minx,miny,maxx,maxy]");
+                    return;
+                }
+                v8::Local<v8::Value> minx = bbox->Get(0);
+                v8::Local<v8::Value> miny = bbox->Get(1);
+                v8::Local<v8::Value> maxx = bbox->Get(2);
+                v8::Local<v8::Value> maxy = bbox->Get(3);
+                if (!minx->IsNumber() || !miny->IsNumber() || !maxx->IsNumber() || !maxy->IsNumber())
+                {
+                    Nan::ThrowError("max_extent [minx,miny,maxx,maxy] must be numbers");
+                    return;
+                }
+                extent = mapnik::box2d<double>(minx->NumberValue(),miny->NumberValue(),
+                                               maxx->NumberValue(),maxy->NumberValue());
+            }
+        }
+
+        mapnik::query q(extent);
         mapnik::layer_descriptor ld = d->datasource_->get_descriptor();
         auto const& desc = ld.get_descriptors();
         for (auto const& attr_info : desc)
@@ -159,12 +198,12 @@ NAN_METHOD(MemoryDatasource::featureset)
             /* LCOV_EXCL_STOP */
         }
         mapnik::featureset_ptr fs = d->datasource_->features(q);
-        if (fs)
+        if (fs && mapnik::is_valid(fs))
         {
             info.GetReturnValue().Set(Featureset::NewInstance(fs));
         }
     }
-    
+
     // Even if there is an empty query, a featureset is still created
     // therefore it should be impossible to reach this point in the code.
     /* LCOV_EXCL_START */
