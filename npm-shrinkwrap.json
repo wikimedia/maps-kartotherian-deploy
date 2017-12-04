@@ -1125,7 +1125,7 @@
     },
     "kartotherian": {
       "version": "0.0.32",
-      "from": "git+https://github.com/kartotherian/kartotherian.git#v0.0.32",
+      "from": "git+https://github.com/kartotherian/kartotherian.git#master",
       "resolved": "git+https://github.com/kartotherian/kartotherian.git#5da4e0bfff9ec8f020a234c0c28657cc3be41272"
     },
     "lcid": {
