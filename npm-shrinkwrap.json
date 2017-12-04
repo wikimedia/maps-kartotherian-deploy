@@ -84,8 +84,8 @@
     },
     "@kartotherian/snapshot": {
       "version": "0.3.4",
-      "from": "@kartotherian/snapshot@>=0.3.4 <0.4.0",
-      "resolved": "https://registry.npmjs.org/@kartotherian/snapshot/-/snapshot-0.3.4.tgz"
+      "from": "kartotherian/snapshot#master",
+      "resolved": "git://github.com/kartotherian/snapshot.git#b41271e76c636955da18e12614e3933881c8779d"
     },
     "@kartotherian/substantial": {
       "version": "0.0.8",
@@ -205,9 +205,9 @@
       "resolved": "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
     },
     "aws-sdk": {
-      "version": "2.162.0",
+      "version": "2.163.0",
       "from": "aws-sdk@>=2.2.30 <3.0.0",
-      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.162.0.tgz",
+      "resolved": "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.163.0.tgz",
       "dependencies": {
         "sax": {
           "version": "1.2.1",
@@ -1125,8 +1125,8 @@
     },
     "kartotherian": {
       "version": "0.0.32",
-      "from": "git+https://github.com/kartotherian/kartotherian.git#master",
-      "resolved": "git+https://github.com/kartotherian/kartotherian.git#5da4e0bfff9ec8f020a234c0c28657cc3be41272"
+      "from": "git+https://github.com/kartotherian/kartotherian.git#update-snapshot-dep",
+      "resolved": "git+https://github.com/kartotherian/kartotherian.git#4c29aa709b6c75f7f4c85e7ab41ff1d0572cc9f4"
     },
     "lcid": {
       "version": "1.0.0",
