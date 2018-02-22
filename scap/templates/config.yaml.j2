@@ -56,6 +56,19 @@ services:
         query: "{{ default(request.query, {}) }}"
         uri: "<%= restbase %>/{{domain}}/v1/{+path}"
       sources: <%= conf_sources %>
+      modules:
+      - "tilelive-bridge"
+      - "tilelive-vector"
+      - "@kartotherian/autogen"
+      - "@kartotherian/babel"
+      - "@kartotherian/cassandra"
+      - "@kartotherian/demultiplexer"
+      - "@kartotherian/layermixer"
+      - "@kartotherian/overzoom"
+      - "@kartotherian/postgres"
+      - "@kartotherian/substantial"
+      - "@kartotherian/tilelive-http"
+      - "tilejson"
       variables:
         cassandra-pswd: <%= cassandra_password %>
         cassandra-servers:
