@@ -78,6 +78,10 @@ services:
         osmdb-pswd: <%= osmdb_password %>
         osmdb-user: <%= osmdb_user %>
     entrypoint: <%= entrypoint %>
+    requestHandlers:
+    - "@kartotherian/geoshapes"
+    - "@kartotherian/maki"
+    - "@kartotherian/snapshot"
     module: <%= module %>
     name: <%= name %>
 worker_heap_limit_mb: <%= worker_heap_limit_mb %>
