@@ -77,11 +77,11 @@ services:
         cassandra-user: <%= cassandra_user %>
         osmdb-pswd: <%= osmdb_password %>
         osmdb-user: <%= osmdb_user %>
+      requestHandlers:
+      - "@kartotherian/geoshapes"
+      - "@kartotherian/maki"
+      - "@kartotherian/snapshot"
     entrypoint: <%= entrypoint %>
-    requestHandlers:
-    - "@kartotherian/geoshapes"
-    - "@kartotherian/maki"
-    - "@kartotherian/snapshot"
     module: <%= module %>
     name: <%= name %>
 worker_heap_limit_mb: <%= worker_heap_limit_mb %>
