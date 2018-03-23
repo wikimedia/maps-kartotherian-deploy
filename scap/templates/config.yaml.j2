@@ -57,11 +57,11 @@ services:
         uri: "<%= restbase %>/{{domain}}/v1/{+path}"
       sources:
         # Cassandra storage
-        <%= storage_id %>:
+        <%= @storage_id %>:
           uri: cassandra://
           params:
             maxzoom: 16
-            keyspace: <%= storage_id %>
+            keyspace: <%= @storage_id %>
             cp: {var: cassandra-servers}
             username: {var: cassandra-user}
             password: {var: cassandra-pswd}
@@ -72,7 +72,7 @@ services:
         osm-localized:
           uri: babel://
           params:
-            source: {ref: <%= storage_id %>}
+            source: {ref: <%= @storage_id %>}
             tag: name
             combineName: true
             defaultLanguage: en
@@ -102,7 +102,7 @@ services:
           maxwidth: 2048
           uri: vector://
           xml:
-            loader: <%= style %>
+            loader: <%= @style %>
           xmlSetParams:
             source: {ref: osm-pbf}
           overrideInfo:
@@ -122,7 +122,7 @@ services:
           maxwidth: 2048
           uri: vector://
           xml:
-            loader: <%= style %>
+            loader: <%= @style %>
           xmlSetParams:
             source: {ref: osm-pbf}
           xmlExceptLayers: ['country_label', 'place_label', 'poi_label']
