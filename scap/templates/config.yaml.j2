@@ -58,7 +58,6 @@ services:
       sources: <%= conf_sources %>
       modules:
       - "tilelive-bridge"
-      - "tilelive-vector"
       - "@kartotherian/autogen"
       - "@kartotherian/babel"
       - "@kartotherian/cassandra"
@@ -66,6 +65,7 @@ services:
       - "@kartotherian/overzoom"
       - "@kartotherian/postgres"
       - "@kartotherian/substantial"
+      - "@kartotherian/tilelive-vector"
       - "tilejson"
       variables:
         cassandra-pswd: <%= cassandra_password %>
