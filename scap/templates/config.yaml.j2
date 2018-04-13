@@ -87,7 +87,7 @@ services:
             source: {ref: <%= storage_id %>}
             maxzoom: 19
           overrideInfo:
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+            attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm-pbf/{z}/{x}/{y}.pbf']
           defaultHeaders:
             Cache-Control: 'public, max-age=86400, s-maxage=86400'
@@ -107,7 +107,7 @@ services:
           xmlSetParams:
             source: {ref: osm-pbf}
           overrideInfo:
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+            attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png']
           defaultHeaders:
             Cache-Control: 'public, max-age=86400, s-maxage=86400'
@@ -128,7 +128,7 @@ services:
             source: {ref: osm-pbf}
           xmlExceptLayers: ['country_label', 'place_label', 'poi_label']
           overrideInfo:
-            attribution: 'Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+            attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm/{z}/{x}/{y}.png']
           defaultHeaders:
             Cache-Control: 'public, max-age=86400, s-maxage=86400'
