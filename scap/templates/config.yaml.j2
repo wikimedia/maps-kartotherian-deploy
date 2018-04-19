@@ -70,14 +70,6 @@ services:
         #    durablewrite: 0
         #    createIfMissing: false
 
-        # osm-localized:
-        #   uri: babel://
-        #   params:
-        #     source: {ref: <%= storage_id %>}
-        #     tag: name
-        #     combineName: false
-        #     defaultLanguage: en
-
         # OSM PBF source
         osm-pbf:
           public: true
@@ -103,7 +95,7 @@ services:
           maxwidth: 2048
           uri: vector://
           xml:
-            loader: <%= style %>
+            loader: "@kartotherian/osm-bright-style-prei18n"
           xmlSetParams:
             source: {ref: osm-pbf}
           overrideInfo:
@@ -123,7 +115,7 @@ services:
           maxwidth: 2048
           uri: vector://
           xml:
-            loader: <%= style %>
+            loader: "@kartotherian/osm-bright-style-prei18n"
           xmlSetParams:
             source: {ref: osm-pbf}
           xmlExceptLayers: ['country_label', 'place_label', 'poi_label']
@@ -132,10 +124,73 @@ services:
             tiles: ['https://maps.wikimedia.org/osm/{z}/{x}/{y}.png']
           defaultHeaders:
             Cache-Control: 'public, max-age=86400, s-maxage=86400'
+
+        {% if tilerator_storage_id != storage_id %}
+        # Temporary: i18n sources
+
+        # reads from the new cassandra keyspace with i18n tiles
+        <%= tilerator_storage_id %>:
+          uri: cassandra://
+          params:
+            maxzoom: 16
+            keyspace: <%= tilerator_storage_id %>
+            cp: {var: cassandra-servers}
+            username: {var: cassandra-user}
+            password: {var: cassandra-pswd}
+            setLastModified: true
+
+        # creates the 'name' attribute based on name_* attributes and lang param
+        <%= tilerator_storage_id %>-i18n:
+          uri: babel://
+          params:
+            source: {ref: <%= tilerator_storage_id %>}
+            tag: name
+            combineName: false
+            defaultLanguage: en
+
+        # creates missing tiles with overzoom from the previous source
+        osm-pbf-i18n:
+          public: true
+          formats: [pbf]
+          uri: overzoom://
+          params:
+            source: {ref: <%= tilerator_storage_id %>-i18n}
+            maxzoom: 19
+          overrideInfo:
+            attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+            tiles: ['https://maps.wikimedia.org/osm-pbf-i18n/{z}/{x}/{y}.pbf']
+          defaultHeaders:
+            # tiles still being generated, don't cache overzoomed tiles for too long
+            Cache-Control: 'public, max-age=3600'
+
+        # renders i18n tiles with the latest style
+        # can be accessed with ?s=osm-intl-i18n
+        osm-intl-i18n:
+          public: true
+          formats: [png,json,headers,svg,jpeg]
+          scales: [1.3, 1.5, 2, 2.6, 3]
+          maxzoom: 19
+          static: true
+          maxheight: 2048
+          maxwidth: 2048
+          uri: vector://
+          xml:
+            loader: <%= style %>
+          xmlSetParams:
+            source: {ref: osm-pbf-i18n}
+          overrideInfo:
+            attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+            tiles: ['https://maps.wikimedia.org/osm-intl-i18n/{z}/{x}/{y}.png']
+          defaultHeaders:
+            # tiles still being generated, don't cache overzoomed tiles for too long
+            Cache-Control: 'public, max-age=3600'
+        # end: Temporary: i18n sources
+        {% endif %}
+
       modules:
       - "tilelive-bridge"
       - "@kartotherian/autogen"
-      # - "@kartotherian/babel"
+      - "@kartotherian/babel"
       - "@kartotherian/cassandra"
       - "@kartotherian/layermixer"
       - "@kartotherian/overzoom"
