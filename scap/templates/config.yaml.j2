@@ -125,7 +125,7 @@ services:
           defaultHeaders:
             Cache-Control: 'public, max-age=86400, s-maxage=86400'
 
-        {% if tilerator_storage_id != storage_id %}
+        <% if tilerator_storage_id != storage_id %>
         # Temporary: i18n sources
 
         # reads from the new cassandra keyspace with i18n tiles
@@ -185,7 +185,7 @@ services:
             # tiles still being generated, don't cache overzoomed tiles for too long
             Cache-Control: 'public, max-age=3600'
         # end: Temporary: i18n sources
-        {% endif %}
+        <% end %>
 
       modules:
       - "tilelive-bridge"
