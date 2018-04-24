@@ -139,22 +139,13 @@ services:
             password: {var: cassandra-pswd}
             setLastModified: true
 
-        # creates the 'name' attribute based on name_* attributes and lang param
-        <%= tilerator_storage_id %>-i18n:
-          uri: babel://
-          params:
-            source: {ref: <%= tilerator_storage_id %>}
-            tag: name
-            combineName: false
-            defaultLanguage: en
-
         # creates missing tiles with overzoom from the previous source
         osm-pbf-i18n:
           public: true
           formats: [pbf]
           uri: overzoom://
           params:
-            source: {ref: <%= tilerator_storage_id %>-i18n}
+            source: {ref: <%= tilerator_storage_id %>}
             maxzoom: 19
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
@@ -162,6 +153,15 @@ services:
           defaultHeaders:
             # tiles still being generated, don't cache overzoomed tiles for too long
             Cache-Control: 'public, max-age=3600'
+
+        # creates the 'name' attribute based on name_* attributes and lang param
+        babel:
+          uri: babel://
+          params:
+            source: {ref: osm-pbf-i18n}
+            tag: name
+            combineName: false
+            defaultLanguage: local
 
         # renders i18n tiles with the latest style
         # can be accessed with ?s=osm-intl-i18n
@@ -177,7 +177,7 @@ services:
           xml:
             loader: <%= style %>
           xmlSetParams:
-            source: {ref: osm-pbf-i18n}
+            source: {ref: babel}
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm-intl-i18n/{z}/{x}/{y}.png']
