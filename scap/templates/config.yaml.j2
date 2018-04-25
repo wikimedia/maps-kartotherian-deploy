@@ -44,11 +44,11 @@ services:
         uri: "<%= restbase %>/{{domain}}/v1/{+path}"
       sources:
         # Cassandra storage
-        <%= storage_id %>:
+        <%= tilerator_storage_id %>:
           uri: cassandra://
           params:
             maxzoom: 16
-            keyspace: <%= storage_id %>
+            keyspace: <%= tilerator_storage_id %>
             cp: {var: cassandra-servers}
             username: {var: cassandra-user}
             password: {var: cassandra-pswd}
@@ -63,7 +63,7 @@ services:
           formats: [pbf]
           uri: overzoom://
           params:
-            source: {ref: <%= storage_id %>}
+            source: {ref: <%= tilerator_storage_id %>}
             maxzoom: 19
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
@@ -82,7 +82,7 @@ services:
           maxwidth: 2048
           uri: vector://
           xml:
-            loader: "@kartotherian/osm-bright-style-prei18n"
+            loader: <%= style %>
           xmlSetParams:
             source: {ref: osm-pbf}
           overrideInfo:
@@ -102,7 +102,7 @@ services:
           maxwidth: 2048
           uri: vector://
           xml:
-            loader: "@kartotherian/osm-bright-style-prei18n"
+            loader: <%= style %>
           xmlSetParams:
             source: {ref: osm-pbf}
           xmlExceptLayers: ['country_label', 'place_label', 'poi_label']
@@ -112,40 +112,11 @@ services:
           defaultHeaders:
             Cache-Control: 'public, max-age=86400, s-maxage=86400'
 
-        <% if tilerator_storage_id != storage_id %>
-        # Temporary: i18n sources
-
-        # reads from the new cassandra keyspace with i18n tiles
-        <%= tilerator_storage_id %>:
-          uri: cassandra://
-          params:
-            maxzoom: 16
-            keyspace: <%= tilerator_storage_id %>
-            cp: {var: cassandra-servers}
-            username: {var: cassandra-user}
-            password: {var: cassandra-pswd}
-            setLastModified: true
-
-        # creates missing tiles with overzoom from the previous source
-        osm-pbf-i18n:
-          public: true
-          formats: [pbf]
-          uri: overzoom://
-          params:
-            source: {ref: <%= tilerator_storage_id %>}
-            maxzoom: 19
-          overrideInfo:
-            attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
-            tiles: ['https://maps.wikimedia.org/osm-pbf-i18n/{z}/{x}/{y}.pbf']
-          defaultHeaders:
-            # tiles still being generated, don't cache overzoomed tiles for too long
-            Cache-Control: 'public, max-age=3600'
-
         # creates the 'name' attribute based on name_* attributes and lang param
         babel:
           uri: babel://
           params:
-            source: {ref: osm-pbf-i18n}
+            source: {ref: osm-pbf}
             tag: name
             combineName: false
             defaultLanguage: local
@@ -171,8 +142,6 @@ services:
           defaultHeaders:
             # tiles still being generated, don't cache overzoomed tiles for too long
             Cache-Control: 'public, max-age=3600'
-        # end: Temporary: i18n sources
-        <% endif %>
 
       modules:
       - "tilelive-bridge"
