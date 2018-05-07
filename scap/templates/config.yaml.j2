@@ -44,11 +44,11 @@ services:
         uri: "<%= restbase %>/{{domain}}/v1/{+path}"
       sources:
         # Cassandra storage
-        <%= tilerator_storage_id %>:
+        <%= storage_id %>:
           uri: cassandra://
           params:
             maxzoom: 16
-            keyspace: <%= tilerator_storage_id %>
+            keyspace: <%= storage_id %>
             cp: {var: cassandra-servers}
             username: {var: cassandra-user}
             password: {var: cassandra-pswd}
@@ -63,13 +63,22 @@ services:
           formats: [pbf]
           uri: overzoom://
           params:
-            source: {ref: <%= tilerator_storage_id %>}
+            source: {ref: <%= storage_id %>}
             maxzoom: 19
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm-pbf/{z}/{x}/{y}.pbf']
           defaultHeaders:
             Cache-Control: 'public, max-age=86400, s-maxage=86400'
+
+        # creates the 'name' attribute based on name_* attributes and lang param
+        babel:
+          uri: babel://
+          params:
+            source: {ref: osm-pbf}
+            tag: name
+            combineName: false
+            defaultLanguage: local
 
         # OSM map with international labeling - will be used as default
         osm-intl:
@@ -84,7 +93,7 @@ services:
           xml:
             loader: <%= style %>
           xmlSetParams:
-            source: {ref: osm-pbf}
+            source: {ref: babel}
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png']
@@ -111,15 +120,6 @@ services:
             tiles: ['https://maps.wikimedia.org/osm/{z}/{x}/{y}.png']
           defaultHeaders:
             Cache-Control: 'public, max-age=86400, s-maxage=86400'
-
-        # creates the 'name' attribute based on name_* attributes and lang param
-        babel:
-          uri: babel://
-          params:
-            source: {ref: osm-pbf}
-            tag: name
-            combineName: false
-            defaultLanguage: local
 
         # renders i18n tiles with the latest style
         # can be accessed with ?s=osm-intl-i18n
