@@ -53,9 +53,6 @@ services:
             username: {var: cassandra-user}
             password: {var: cassandra-pswd}
             setLastModified: true
-        #    repfactor: 4
-        #    durablewrite: 0
-        #    createIfMissing: false
 
         # OSM PBF source
         osm-pbf:
@@ -89,10 +86,10 @@ services:
           static: true
           maxheight: 2048
           maxwidth: 2048
-          uri: vector://
-          xml:
-            loader: <%= style %>
-          xmlSetParams:
+          uri: tmstyle://
+          yaml:
+            npm: [<%= style %>, "project.yml"]
+          yamlSetParams:
             source: {ref: babel}
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
@@ -109,12 +106,12 @@ services:
           static: true
           maxheight: 2048
           maxwidth: 2048
-          uri: vector://
-          xml:
-            loader: <%= style %>
-          xmlSetParams:
+          uri: tmstyle://
+          yaml:
+            npm: [<%= style %>, "project.yml"]
+          yamlSetParams:
             source: {ref: osm-pbf}
-          xmlExceptLayers: ['country_label', 'place_label', 'poi_label']
+          yamlExceptLayers: ['country_label', 'place_label', 'poi_label']
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm/{z}/{x}/{y}.png']
@@ -122,7 +119,7 @@ services:
             Cache-Control: 'public, max-age=86400, s-maxage=86400'
 
       modules:
-      - "tilelive-bridge"
+      - "tilelive-tmstyle"
       - "@kartotherian/autogen"
       - "@kartotherian/babel"
       - "@kartotherian/cassandra"
