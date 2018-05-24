@@ -1,3 +1,4 @@
+style_location: '@kartotherian/osm-bright-style'
 allowed_domains:
   https:
     - mediawiki.org
