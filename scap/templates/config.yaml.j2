@@ -88,7 +88,7 @@ services:
           maxwidth: 2048
           uri: tmstyle://
           yaml:
-            npm: [<%= style %>, "project.yml"]
+            npm: ['<%= style_location %>', "project.yml"]
           yamlSetParams:
             source: {ref: babel}
           overrideInfo:
@@ -108,7 +108,7 @@ services:
           maxwidth: 2048
           uri: tmstyle://
           yaml:
-            npm: [<%= style %>, "project.yml"]
+            npm: ['<%= style_location %>', "project.yml"]
           yamlSetParams:
             source: {ref: osm-pbf}
           yamlExceptLayers: ['country_label', 'place_label', 'poi_label']
