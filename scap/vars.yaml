@@ -1,4 +1,5 @@
 style_location: '@kartotherian/osm-bright-style'
+dbname: gis
 allowed_domains:
   https:
     - mediawiki.org

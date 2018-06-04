@@ -20,7 +20,7 @@ services:
       cors: "*"
       geoshapes:
         allowUserQueries: true
-        database: gis
+        database: '<%= dbname %>'
         host: localhost
         lineTable: planet_osm_line
         password: <%= geoshapes_password %>
