@@ -1,0 +1,5 @@
+allowed_domains:
+  http:
+    - beta.wmflabs.org
+  https:
+    - beta.wmflabs.org
