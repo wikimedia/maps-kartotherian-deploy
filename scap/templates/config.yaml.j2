@@ -66,7 +66,7 @@ services:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm-pbf/{z}/{x}/{y}.pbf']
           defaultHeaders:
-            Cache-Control: 'public, max-age=86400, s-maxage=86400'
+            Cache-Control: 'public, max-age=900, s-maxage=86400'
 
         # creates the 'name' attribute based on name_* attributes and lang param
         babel:
@@ -95,7 +95,7 @@ services:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png']
           defaultHeaders:
-            Cache-Control: 'public, max-age=86400, s-maxage=86400'
+            Cache-Control: 'public, max-age=900, s-maxage=86400'
 
         # OSM map without any labels
         osm:
@@ -116,7 +116,7 @@ services:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm/{z}/{x}/{y}.png']
           defaultHeaders:
-            Cache-Control: 'public, max-age=86400, s-maxage=86400'
+            Cache-Control: 'public, max-age=900, s-maxage=86400'
 
       modules:
       - "tilelive-tmstyle"
