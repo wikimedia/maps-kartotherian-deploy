@@ -19,6 +19,7 @@ services:
       allowedDomains: <%= allowed_domains %>
       cors: "*"
       geoshapes:
+        wikidataQueryService: <%= wikidata_query_service %>
         allowUserQueries: true
         database: gis
         host: localhost
