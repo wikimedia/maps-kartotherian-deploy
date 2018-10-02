@@ -35,7 +35,6 @@ services:
         method: post
         uri: <%= mwapi %>
       port: <%= port %>
-      proxy: <%= proxy %>
       restbase_req:
         body: "{{request.body}}"
         headers: "{{request.headers}}"
