@@ -56,7 +56,8 @@ services:
 
         # OSM PBF source
         osm-pbf:
-          public: false
+          public: true
+          publicinfo: false
           formats: [pbf]
           uri: overzoom://
           params:
