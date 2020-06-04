@@ -2,12 +2,14 @@ logging:
   level: warn
   name: <%= log_name %>
   streams:
-    - host: <%= logstash_host %>
-      port: <%= logstash_port %>
-      type: gelf
     - level: warn
       path: <%= log_file %>
       type: file
+    - type: syslog
+      host: localhost
+      port: <%= rsyslog_port %>
+      prefix: '@cee: '
+      name: node
 metrics:
   host: <%= metrics_host %>
   name: <%= metrics_name %>
