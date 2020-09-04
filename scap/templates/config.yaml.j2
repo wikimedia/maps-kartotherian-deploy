@@ -146,7 +146,7 @@ services:
       - "@kartotherian/maki"
       - "@kartotherian/snapshot"
     entrypoint: <%= entrypoint %>
-    module: <%= module %>
+    module: ./src/packages/kartotherian/app.js
     name: <%= name %>
 worker_heap_limit_mb: <%= worker_heap_limit_mb %>
 worker_heartbeat_timeout: <%= worker_heartbeat_timeout %>

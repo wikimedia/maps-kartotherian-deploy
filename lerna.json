@@ -1,1 +1,7 @@
-src/lerna.json
+{
+  "packages": [
+    "src/packages/*"
+  ],
+  "version": "independent",
+  "npmClientArgs": ["--build-from-source=@kartotherian/mapnik"]
+}
