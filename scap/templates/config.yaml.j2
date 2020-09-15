@@ -123,13 +123,13 @@ services:
 
       modules:
       - "tilelive-tmstyle"
-      - "@kartotherian/autogen"
-      - "@kartotherian/babel"
-      - "@kartotherian/cassandra"
-      - "@kartotherian/layermixer"
-      - "@kartotherian/overzoom"
-      - "@kartotherian/postgres"
-      - "@kartotherian/substantial"
+      - "@wikimedia/kartotherian-autogen"
+      - "@wikimedia/kartotherian-babel"
+      - "@wikimedia/kartotherian-cassandra"
+      - "@wikimedia/kartotherian-layermixer"
+      - "@wikimedia/kartotherian-overzoom"
+      - "@wikimedia/kartotherian-postgres"
+      - "@wikimedia/kartotherian-substantial"
       - "@kartotherian/tilelive-vector"
       - "@mapbox/tilejson"
       variables:
@@ -142,9 +142,9 @@ services:
         osmdb-pswd: <%= osmdb_password %>
         osmdb-user: <%= osmdb_user %>
       requestHandlers:
-      - "@kartotherian/geoshapes"
-      - "@kartotherian/maki"
-      - "@kartotherian/snapshot"
+      - "@wikimedia/kartotherian-geoshapes"
+      - "@wikimedia/kartotherizan-maki"
+      - "@wikimedia/kartotherian-snapshot"
     entrypoint: <%= entrypoint %>
     module: <%= module %>
     name: <%= name %>
