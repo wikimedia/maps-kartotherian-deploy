@@ -13,3 +13,5 @@ allowed_domains:
     - wikiversity.org
     - wikivoyage.org
     - wiktionary.org
+    # Temporarily allow a staging server for WMDE Technical Wishes development, see T278128
+    - collab-wmde-templates-alpha.wmcloud.org
