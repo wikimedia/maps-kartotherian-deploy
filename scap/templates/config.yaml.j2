@@ -45,31 +45,34 @@ services:
         query: "{{ default(request.query, {}) }}"
         uri: "<%= restbase %>/{{domain}}/v1/{+path}"
       sources:
-        # Cassandra storage
-        <%= storage_id %>:
-          uri: cassandra://
-          params:
-            maxzoom: 15
-            keyspace: <%= storage_id %>
-            cp: {var: cassandra-servers}
-            username: {var: cassandra-user}
-            password: {var: cassandra-pswd}
-            setLastModified: true
+        # Tegola backend
+        http-tegola:
+          uri: <%= tegola_uri %>
+          setInfo:
+            vector_layers:
+              - id: landuse
+              - id: waterway
+              - id: water
+              - id: aeroway
+              - id: building
+              - id: road
+              - id: admin
+              - id: country_label
+              - id: place_label
+              - id: poi_label
+              - id: road_label
 
         # OSM PBF source
         osm-pbf:
           public: true
-          publicinfo: false
           formats: [pbf]
           uri: overzoom://
           params:
-            source: {ref: <%= storage_id %>}
+            source: {ref: http-tegola}
             maxzoom: 19
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm-pbf/{z}/{x}/{y}.pbf']
-          defaultHeaders:
-            Cache-Control: 'public, max-age=900, s-maxage=86400'
 
         # creates the 'name' attribute based on name_* attributes and lang param
         babel:
@@ -142,7 +145,6 @@ services:
         osmdb-pswd: <%= osmdb_password %>
         osmdb-user: <%= osmdb_user %>
       requestHandlers:
-      - "@wikimedia/kartotherian-geoshapes"
       - "@wikimedia/kartotherian-maki"
       - "@wikimedia/kartotherian-snapshot"
     entrypoint: <%= entrypoint %>
