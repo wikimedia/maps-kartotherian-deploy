@@ -46,29 +46,38 @@ services:
         uri: "<%= restbase %>/{{domain}}/v1/{+path}"
       sources:
         # Tegola backend
-        http-tegola:
-          uri: <%= tegola_uri %>
-          setInfo:
-            vector_layers:
-              - id: landuse
-              - id: waterway
-              - id: water
-              - id: aeroway
-              - id: building
-              - id: road
-              - id: admin
-              - id: country_label
-              - id: place_label
-              - id: poi_label
-              - id: road_label
-
+#        http-tegola:
+#          uri: <%= tegola_uri %>
+#          setInfo:
+#            vector_layers:
+#              - id: landuse
+#              - id: waterway
+#              - id: water
+#              - id: aeroway
+#              - id: building
+#              - id: road
+#              - id: admin
+#              - id: country_label
+#              - id: place_label
+#              - id: poi_label
+#              - id: road_label
+        # Cassandra storage
+        <%= storage_id %>:
+          uri: cassandra://
+          params:
+            maxzoom: 15
+            keyspace: <%= storage_id %>
+            cp: {var: cassandra-servers}
+            username: {var: cassandra-user}
+            password: {var: cassandra-pswd}
+            setLastModified: true
         # OSM PBF source
         osm-pbf:
           public: true
           formats: [pbf]
           uri: overzoom://
           params:
-            source: {ref: http-tegola}
+            source: {ref: <%= storage_id %>}
             maxzoom: 19
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
