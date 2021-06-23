@@ -155,6 +155,7 @@ services:
         osmdb-pswd: <%= osmdb_password %>
         osmdb-user: <%= osmdb_user %>
       requestHandlers:
+      - "@wikimedia/kartotherian-geoshapes"
       - "@wikimedia/kartotherian-maki"
       - "@wikimedia/kartotherian-snapshot"
     entrypoint: <%= entrypoint %>
