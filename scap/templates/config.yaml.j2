@@ -77,7 +77,7 @@ services:
           params:
             source: { ref: <%= storage_id %> }
             secondarySource: { ref: http-tegola }
-            enableMirror: false
+            enableMirror: true
             loadBalancer:
               bucketSize: 1000 # milliseconds
               totalBuckets: 10 # number of buckets in the histogram
