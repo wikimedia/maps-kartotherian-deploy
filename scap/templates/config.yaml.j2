@@ -46,21 +46,32 @@ services:
         uri: "<%= restbase %>/{{domain}}/v1/{+path}"
       sources:
         # Tegola backend
-#        http-tegola:
-#          uri: <%= tegola_uri %>
-#          setInfo:
-#            vector_layers:
-#              - id: landuse
-#              - id: waterway
-#              - id: water
-#              - id: aeroway
-#              - id: building
-#              - id: road
-#              - id: admin
-#              - id: country_label
-#              - id: place_label
-#              - id: poi_label
-#              - id: road_label
+        http-tegola:
+          uri: <%= tegola_uri %>
+          setInfo:
+            vector_layers:
+              - id: landuse
+              - id: waterway
+              - id: water
+              - id: aeroway
+              - id: building
+              - id: road
+              - id: admin
+              - id: country_label
+              - id: place_label
+              - id: poi_label
+              - id: road_label
+        # Mirror requests to tegola
+        switch:
+          uri: mirror://
+          params:
+            source: { ref: <%= storage_id %> }
+            secondarySource: { ref: http-tegola }
+            enableMirror: false
+            loadBalancer:
+              bucketSize: 1000 # milliseconds
+              totalBuckets: 10 # number of buckets in the histogram
+              threshold: 0.1 # 10% of load to the mirrored source
         # Cassandra storage
         <%= storage_id %>:
           uri: cassandra://
@@ -77,7 +88,7 @@ services:
           formats: [pbf]
           uri: overzoom://
           params:
-            source: {ref: <%= storage_id %>}
+            source: {ref: switch}
             maxzoom: 19
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
