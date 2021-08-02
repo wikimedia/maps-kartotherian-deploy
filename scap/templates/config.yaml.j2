@@ -103,16 +103,23 @@ services:
             combineName: false
             defaultLanguage: local
 
+        # expands name_ json blob into several name_{code} tags
+        genall-tegola:
+          uri: json2tags://
+          params:
+            source: {ref: http-tegola}
+            tag: name
+
         # creates the 'name' attribute based on name_* attributes and lang param
         babel-tegola:
           uri: babel://
           params:
-            source: {ref: http-tegola}
+            source: {ref: genall-tegola}
             tag: name
             combineName: false
             defaultLanguage: local
 
-        # OSM map with international labeling - will be used as default
+        # OSM map with international labeling
         osm-tegola:
           public: true
           formats: [png,json,headers,svg,jpeg]
