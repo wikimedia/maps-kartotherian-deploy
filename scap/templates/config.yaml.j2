@@ -65,7 +65,7 @@ services:
         <%= storage_id %>:
           uri: cassandra://
           params:
-            maxzoom: 13
+            maxzoom: 15
             keyspace: <%= storage_id %>
             cp: {var: cassandra-servers}
             username: {var: cassandra-user}
