@@ -81,7 +81,7 @@ services:
             loadBalancer:
               bucketSize: 1000 # milliseconds
               totalBuckets: 10 # number of buckets in the histogram
-              threshold: 0.01 # 1% of load to the mirrored source
+              threshold: 0.05 # 5% of load to the mirrored source
         # OSM PBF source
         osm-pbf:
           public: true
