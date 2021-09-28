@@ -13,4 +13,4 @@ allowed_domains:
     - wikiversity.org
     - wikivoyage.org
     - wiktionary.org
-tegola_uri: https://tegola-vector-tiles.svc.eqiad.wmnet:4105/maps/osm/{z}/{x}/{y}.pbf
+tegola_uri: https://tegola-vector-tiles.discovery.wmnet:4105/maps/osm/{z}/{x}/{y}.pbf
