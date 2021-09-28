@@ -13,5 +13,5 @@ allowed_domains:
     - wikiversity.org
     - wikivoyage.org
     - wiktionary.org
-tegola_uri: https://tegola-vector-tiles.discovery.wmnet:4105/maps/osm/{z}/{x}/{y}.pbf
-mirror_threshold: 0 # 0% of mirrored traffic
+tegola_uri: https://tegola-vector-tiles.svc.codfw.wmnet:4105/maps/osm/{z}/{x}/{y}.pbf
+mirror_threshold: 0.05 # 5% of mirrored traffic
