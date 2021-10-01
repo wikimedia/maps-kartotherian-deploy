@@ -1,2 +1,2 @@
 tegola_uri: https://tegola-vector-tiles.svc.codfw.wmnet:4105/maps/osm/{z}/{x}/{y}.pbf
-mirror_threshold: 0.5 # 50% of mirrored traffic
+mirror_threshold: 0.8 # 80% of mirrored traffic
