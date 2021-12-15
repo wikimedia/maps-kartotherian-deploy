@@ -110,11 +110,23 @@ services:
             source: {ref: http-tegola}
             tag: name
 
+        # Tegola OSM PBF source applying overzoom
+        pbf-tegola:
+          public: true
+          formats: [pbf]
+          uri: overzoom://
+          params:
+            source: {ref: genall-tegola}
+            maxzoom: 19
+          overrideInfo:
+            attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+            tiles: ['https://maps.wikimedia.org/osm-tegola/{z}/{x}/{y}.pbf']
+
         # creates the 'name' attribute based on name_* attributes and lang param
         babel-tegola:
           uri: babel://
           params:
-            source: {ref: genall-tegola}
+            source: {ref: pbf-tegola}
             tag: name
             combineName: false
             defaultLanguage: local
