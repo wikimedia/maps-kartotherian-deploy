@@ -61,6 +61,14 @@ services:
               - id: place_label
               - id: poi_label
               - id: road_label
+
+        # expands name_ json blob into several name_{code} tags
+        genall-tegola:
+          uri: json2tags://
+          params:
+            source: {ref: http-tegola}
+            tag: name
+
         # Cassandra storage
         <%= storage_id %>:
           uri: cassandra://
@@ -71,24 +79,26 @@ services:
             username: {var: cassandra-user}
             password: {var: cassandra-pswd}
             setLastModified: true
+
         # Mirror requests to tegola
         switch:
           uri: mirror://
           params:
             source: { ref: <%= storage_id %> }
-            secondarySource: { ref: http-tegola }
+            secondarySource: { ref: genall-tegola }
             enableMirror: <%= enable_mirror %>
             loadBalancer:
               bucketSize: 1000 # milliseconds
               totalBuckets: 10 # number of buckets in the histogram
               threshold: <%= mirror_threshold %> # 5% of load to the mirrored source
+
         # OSM PBF source
         osm-pbf:
           public: true
           formats: [pbf]
           uri: overzoom://
           params:
-            source: {ref: switch}
+            source: {ref: genall-tegola}
             maxzoom: 19
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
@@ -99,34 +109,6 @@ services:
           uri: babel://
           params:
             source: {ref: osm-pbf}
-            tag: name
-            combineName: false
-            defaultLanguage: local
-
-        # expands name_ json blob into several name_{code} tags
-        genall-tegola:
-          uri: json2tags://
-          params:
-            source: {ref: http-tegola}
-            tag: name
-
-        # Tegola OSM PBF source applying overzoom
-        pbf-tegola:
-          public: true
-          formats: [pbf]
-          uri: overzoom://
-          params:
-            source: {ref: genall-tegola}
-            maxzoom: 19
-          overrideInfo:
-            attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
-            tiles: ['https://maps.wikimedia.org/osm-tegola/{z}/{x}/{y}.pbf']
-
-        # creates the 'name' attribute based on name_* attributes and lang param
-        babel-tegola:
-          uri: babel://
-          params:
-            source: {ref: pbf-tegola}
             tag: name
             combineName: false
             defaultLanguage: local
@@ -144,7 +126,7 @@ services:
           yaml:
             npm: ['<%= style_location %>', "project.yml"]
           yamlSetParams:
-            source: {ref: babel-tegola}
+            source: {ref: babel}
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
             tiles: ['https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png']
