@@ -49,6 +49,7 @@ services:
         http-tegola:
           uri: <%= tegola_uri %>
           setInfo:
+            maxzoom: 15
             vector_layers:
               - id: landuse
               - id: waterway
@@ -61,8 +62,6 @@ services:
               - id: place_label
               - id: poi_label
               - id: road_label
-          params:
-            maxzoom: 15
 
         # expands name_ json blob into several name_{code} tags
         genall-tegola:
