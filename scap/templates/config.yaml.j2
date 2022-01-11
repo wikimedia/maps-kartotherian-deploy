@@ -70,17 +70,6 @@ services:
             source: {ref: http-tegola}
             tag: name
 
-        # Cassandra storage
-        <%= storage_id %>:
-          uri: cassandra://
-          params:
-            maxzoom: 15
-            keyspace: <%= storage_id %>
-            cp: {var: cassandra-servers}
-            username: {var: cassandra-user}
-            password: {var: cassandra-pswd}
-            setLastModified: true
-
         # Mirror requests to tegola
         switch:
           uri: mirror://
@@ -181,7 +170,6 @@ services:
       - "@wikimedia/kartotherian-tilelive-switch"
       - "@wikimedia/kartotherian-autogen"
       - "@wikimedia/kartotherian-babel"
-      - "@wikimedia/kartotherian-cassandra"
       - "@wikimedia/kartotherian-layermixer"
       - "@wikimedia/kartotherian-overzoom"
       - "@wikimedia/kartotherian-postgres"
@@ -189,12 +177,6 @@ services:
       - "@kartotherian/tilelive-vector"
       - "@mapbox/tilejson"
       variables:
-        cassandra-pswd: <%= cassandra_password %>
-        cassandra-servers:
-        <% for server in cassandra_servers -%>
-          - <%= server %>
-        <% endfor -%>
-        cassandra-user: <%= cassandra_user %>
         osmdb-pswd: <%= osmdb_password %>
         osmdb-user: <%= osmdb_user %>
       requestHandlers:
