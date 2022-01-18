@@ -3,3 +3,4 @@ allowed_domains:
     - beta.wmflabs.org
   https:
     - beta.wmflabs.org
+tegola_uri: http://maps-tile-server01.maps-experiments.eqiad1.wikimedia.cloud:8080/maps/osm/{z}/{x}/{y}.pbf
