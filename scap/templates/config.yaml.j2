@@ -70,17 +70,43 @@ services:
             source: {ref: http-tegola}
             tag: name
 
+        # Tegola eqiad backend (temporary)
+        http-tegola-eqiad:
+          # explicitly set eqiad uri for tile mirroring in order to test initial load on the cluster
+          uri: https://tegola-vector-tiles.svc.eqiad.wmnet:4105/maps/osm/{z}/{x}/{y}.pbf
+          setInfo:
+            maxzoom: 15
+            vector_layers:
+              - id: landuse
+              - id: waterway
+              - id: water
+              - id: aeroway
+              - id: building
+              - id: road
+              - id: admin
+              - id: country_label
+              - id: place_label
+              - id: poi_label
+              - id: road_label
+
+        # expands name_ json blob into several name_{code} tags
+        genall-tegola-eqiad:
+          uri: json2tags://
+          params:
+            source: {ref: http-tegola-eqiad}
+            tag: name
+
         # Mirror requests to tegola
-        switch:
+        mirror:
           uri: mirror://
           params:
-            source: { ref: <%= storage_id %> }
-            secondarySource: { ref: genall-tegola }
+            source: { ref: genall-tegola }
+            secondarySource: { ref: genall-tegola-eqiad }
             enableMirror: <%= enable_mirror %>
             loadBalancer:
               bucketSize: 1000 # milliseconds
               totalBuckets: 10 # number of buckets in the histogram
-              threshold: <%= mirror_threshold %> # 5% of load to the mirrored source
+              threshold: <%= mirror_threshold %>
 
         # OSM PBF source
         osm-pbf:
@@ -88,7 +114,7 @@ services:
           formats: [pbf]
           uri: overzoom://
           params:
-            source: {ref: genall-tegola}
+            source: {ref: mirror}
             maxzoom: 19
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
