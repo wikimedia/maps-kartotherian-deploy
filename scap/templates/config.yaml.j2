@@ -70,18 +70,6 @@ services:
             source: {ref: http-tegola}
             tag: name
 
-        # Mirror requests to tegola
-        switch:
-          uri: mirror://
-          params:
-            source: { ref: <%= storage_id %> }
-            secondarySource: { ref: genall-tegola }
-            enableMirror: <%= enable_mirror %>
-            loadBalancer:
-              bucketSize: 1000 # milliseconds
-              totalBuckets: 10 # number of buckets in the histogram
-              threshold: <%= mirror_threshold %> # 5% of load to the mirrored source
-
         # OSM PBF source
         osm-pbf:
           public: true
