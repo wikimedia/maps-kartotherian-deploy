@@ -30,6 +30,7 @@ services:
         polygonTable: wikidata_relation_polygon
         table: planet_osm_polygon
         user: <%= geoshapes_user %>
+        max_conns: <%= geoshapes_max_conns %>
       mwapi_req:
         body: "{{ default(request.query, {}) }}"
         headers:
