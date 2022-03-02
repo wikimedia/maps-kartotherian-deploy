@@ -18,4 +18,4 @@ allowed_domains:
 tegola_uri: https://tegola-vector-tiles.svc.codfw.wmnet:4105/maps/osm/{z}/{x}/{y}.pbf
 mirror_threshold: 0 # Default to no traffic mirroring
 enable_mirror: false
-geoshapes_pool_size: 3
+geoshapes_pool_size: 1
