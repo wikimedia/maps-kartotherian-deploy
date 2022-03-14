@@ -13,9 +13,7 @@ allowed_domains:
     - wikiversity.org
     - wikivoyage.org
     - wiktionary.org
-    # Temporarily allow a staging server for WMDE Technical Wishes development, see T278128
-    - collab-wmde-templates-alpha.wmcloud.org
 tegola_uri: https://tegola-vector-tiles.svc.codfw.wmnet:4105/maps/osm/{z}/{x}/{y}.pbf
-mirror_threshold: 0 # Default to no traffic mirroring
-enable_mirror: false
 geoshapes_pool_size: 10
+mirror_threshold: 1 # 100% of load to the mirrored source
+enable_mirror: true

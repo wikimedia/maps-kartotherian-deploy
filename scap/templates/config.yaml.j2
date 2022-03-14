@@ -64,11 +64,42 @@ services:
               - id: poi_label
               - id: road_label
 
+        # Tegola eqiad backend (temporary)
+        http-tegola-eqiad:
+          # explicitly set eqiad uri for tile mirroring in order to test initial load on the cluster
+          uri: https://tegola-vector-tiles.svc.eqiad.wmnet:4105/maps/osm/{z}/{x}/{y}.pbf
+          setInfo:
+            maxzoom: 15
+            vector_layers:
+              - id: landuse
+              - id: waterway
+              - id: water
+              - id: aeroway
+              - id: building
+              - id: road
+              - id: admin
+              - id: country_label
+              - id: place_label
+              - id: poi_label
+              - id: road_label
+
+        # Mirror requests to tegola
+        mirror:
+          uri: mirror://
+          params:
+            source: { ref: http-tegola }
+            secondarySource: { ref: http-tegola-eqiad }
+            enableMirror: <%= enable_mirror %>
+            loadBalancer:
+              bucketSize: 1000 # milliseconds
+              totalBuckets: 10 # number of buckets in the histogram
+              threshold: <%= mirror_threshold %>
+
         # expands name_ json blob into several name_{code} tags
-        genall-tegola:
+        genall:
           uri: json2tags://
           params:
-            source: {ref: http-tegola}
+            source: {ref: mirror}
             tag: name
 
         # OSM PBF source
@@ -77,7 +108,7 @@ services:
           formats: [pbf]
           uri: overzoom://
           params:
-            source: {ref: genall-tegola}
+            source: {ref: genall}
             maxzoom: 19
           overrideInfo:
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia maps</a> | Map data &copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
