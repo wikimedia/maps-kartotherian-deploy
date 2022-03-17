@@ -24,7 +24,7 @@ function doit () {
     node ./node_modules/.bin/node-pre-gyp publish
     node ./node_modules/.bin/node-pre-gyp info
     rm -rf {build,lib/binding}
-    npm install --fallback-to-build=false
+    npm install
     npm test
 }
 
