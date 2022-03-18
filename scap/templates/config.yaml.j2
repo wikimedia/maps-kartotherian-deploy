@@ -187,19 +187,19 @@ services:
       - "tilelive-tmstyle"
       - "tilelive-http"
       - "@wikimedia/kartotherian-tilelive-switch"
-      - "@wikimedia/kartotherian-autogen"
-      - "@wikimedia/kartotherian-babel"
-      - "@wikimedia/kartotherian-overzoom"
-      - "@wikimedia/kartotherian-substantial"
+      - "../lib/autogen"
+      - "../lib/babel"
+      - "../lib/overzoom"
+      - "../lib/substantial"
       - "@kartotherian/tilelive-vector"
       - "@mapbox/tilejson"
       variables:
         osmdb-pswd: <%= osmdb_password %>
         osmdb-user: <%= osmdb_user %>
       requestHandlers:
-      - "@wikimedia/kartotherian-geoshapes"
-      - "@wikimedia/kartotherian-maki"
-      - "@wikimedia/kartotherian-snapshot"
+      - "../lib/geoshapes"
+      - "../lib/maki"
+      - "../lib/snapshot"
     entrypoint: <%= entrypoint %>
     module: <%= module %>
     name: <%= name %>
