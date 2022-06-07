@@ -4,3 +4,4 @@ allowed_domains:
   https:
     - beta.wmflabs.org
 tegola_uri: https://tegola.wmflabs.org/maps/osm/{z}/{x}/{y}.pbf
+enable_geopoints: true

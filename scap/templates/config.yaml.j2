@@ -31,6 +31,8 @@ services:
         table: planet_osm_polygon
         user: <%= geoshapes_user %>
         poolSize: <%= geoshapes_pool_size %>
+        enableGeopoints: <%= enable_geopoints|default("false") %>
+        coordinatePredicateId: "wdt:P625"
       mwapi_req:
         body: "{{ default(request.query, {}) }}"
         headers:
