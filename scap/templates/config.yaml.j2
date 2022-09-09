@@ -33,6 +33,7 @@ services:
         poolSize: <%= geoshapes_pool_size %>
         enableGeopoints: <%= enable_geopoints|default("false") %>
         coordinatePredicateId: "wdt:P625"
+        userAgentContact: "the WMF Content Transform Team (https://www.mediawiki.org/wiki/Content_Transform_Team)"
       mwapi_req:
         body: "{{ default(request.query, {}) }}"
         headers:
