@@ -187,22 +187,19 @@ services:
             Cache-Control: 'public, max-age=900, s-maxage=86400'
 
       modules:
-      - "tilelive-tmstyle"
-      - "tilelive-http"
-      - "@wikimedia/kartotherian-tilelive-switch"
-      - "../lib/autogen"
-      - "../lib/babel"
-      - "../lib/overzoom"
-      - "../lib/substantial"
+      - tilelive-tmstyle
+      - tilelive-http
+      - ../lib/babel
+      - ../lib/overzoom
       - "@kartotherian/tilelive-vector"
       - "@mapbox/tilejson"
       variables:
         osmdb-pswd: <%= osmdb_password %>
         osmdb-user: <%= osmdb_user %>
       requestHandlers:
-      - "../lib/geoshapes"
-      - "../lib/maki"
-      - "../lib/snapshot"
+      - ../lib/geoshapes
+      - ../lib/maki
+      - ../lib/snapshot
     entrypoint: <%= entrypoint %>
     module: <%= module %>
     name: <%= name %>
