@@ -14,7 +14,8 @@ allowed_domains:
     - wikivoyage.org
     - wiktionary.org
 tegola_uri: https://tegola-vector-tiles.svc.codfw.wmnet:4105/maps/osm/{z}/{x}/{y}.pbf
+tegola_secondary_uri: https://tegola-vector-tiles.svc.eqiad.wmnet:4105/maps/osm/{z}/{x}/{y}.pbf
 geoshapes_pool_size: 10
 mirror_threshold: 1 # 100% of load to the mirrored source
-enable_mirror: true
+enable_mirror: false
 enable_geopoints: true
