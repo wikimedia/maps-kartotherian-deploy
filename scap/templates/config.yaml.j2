@@ -20,6 +20,7 @@ services:
   - conf:
       allowedDomains: <%= allowed_domains %>
       cors: "*"
+      csp: "default-src 'self'; object-src 'none'; media-src 'none'; style-src 'none'; frame-ancestors 'self'"
       geoshapes:
         wikidataQueryService: <%= wikidata_query_service %>
         allowUserQueries: true
